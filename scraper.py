@@ -1,5 +1,6 @@
 import requests 
 import json
+import os 
 from bs4 import BeautifulSoup
 
 
@@ -49,6 +50,10 @@ while(url):
         url = None
 
 print(len(all_opinions))
-with open(f"./opinions/{product_code}.json","w",encoding="UTF-8") as  jf:
-   json.dump(all_opinions, jf, indent=4, ensure_ascii= False )
+try:
+    os.mkdir("./opinions")
+except FileExistsError:
+   pass
 
+with open(f"./opinions/{product_code}.json","w",encoding="UTF-8") as  jf:
+        json.dump(all_opinions, jf, indent=4, ensure_ascii= False )
